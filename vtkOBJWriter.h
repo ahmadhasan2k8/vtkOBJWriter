@@ -18,40 +18,44 @@
 
 /** vtkOBJWriter - Write a Wavefront OBJ (ASCII) file. The core of this class
   * was taken from vtkOBJExporter. The goal is to make it follow the standard
-  * "writer" syntax that is present for the rest of the VTK writers (vtkPLYWriter, etc).
-  * It only saves the geometry (vertices, lines, polylines, strips) with normals and tcoords (if any).
+  * "writer" syntax that is present for the rest of the VTK writers
+ * (vtkPLYWriter, etc).
+  * It only saves the geometry (vertices, lines, polylines, strips) with normals
+ * and tcoords (if any).
   * It does not write triangle strips properly.
   */
 
 #ifndef __vtkOBJWriter_h
 #define __vtkOBJWriter_h
 
-#include "vtkPolyDataAlgorithm.h" //superclass
+#include "vtkPolyDataAlgorithm.h"  //superclass
 
 class vtkOBJWriter : public vtkPolyDataAlgorithm
 {
-public:
+ public:
   static vtkOBJWriter *New();
-  vtkTypeMacro(vtkOBJWriter,vtkPolyDataAlgorithm);
-  void PrintSelf(ostream& os, vtkIndent indent);
+  vtkTypeMacro(vtkOBJWriter, vtkPolyDataAlgorithm)
+
+      void PrintSelf(ostream &os, vtkIndent indent);
 
   // Description:
   // Specify the name of the file to write out.
   vtkSetStringMacro(FileName);
   vtkGetStringMacro(FileName);
 
-  int RequestData(vtkInformation *, vtkInformationVector **, vtkInformationVector *);
+  int RequestData(vtkInformation *,
+                  vtkInformationVector **,
+                  vtkInformationVector *);
 
-protected:
+ protected:
   vtkOBJWriter();
   ~vtkOBJWriter();
 
-private:
-  vtkOBJWriter(const vtkOBJWriter&);  // Not implemented.
-  void operator=(const vtkOBJWriter&);  // Not implemented.
+ private:
+  vtkOBJWriter(const vtkOBJWriter &);    // Not implemented.
+  void operator=(const vtkOBJWriter &);  // Not implemented.
 
   char *FileName;
 };
 
 #endif
-
